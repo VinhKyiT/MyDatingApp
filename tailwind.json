@@ -1,9 +1,4 @@
 {
-	"h-full": {
-		"style": {
-			"height": "100%"
-		}
-	},
 	"flex-1": {
 		"style": {
 			"flexGrow": 1,
