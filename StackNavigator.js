@@ -9,9 +9,9 @@ import useAuth from './src/hooks/useAuth';
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
-  const { user } = useAuth();
+  const { user, error } = useAuth();
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       {user ? (
         <>
           <Stack.Screen name="Home" component={HomeScreen} />

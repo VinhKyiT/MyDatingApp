@@ -1,5 +1,77 @@
+.absolute {
+  position: absolute
+}
+
+.relative {
+  position: relative
+}
+
+.bottom-40 {
+  bottom: 10rem
+}
+
+.top-5 {
+  top: 1.25rem
+}
+
+.left-3 {
+  left: 0.75rem
+}
+
+.top-3 {
+  top: 0.75rem
+}
+
+.left-5 {
+  left: 1.25rem
+}
+
+.right-5 {
+  right: 1.25rem
+}
+
+.h-full {
+  height: 100%
+}
+
+.h-10 {
+  height: 2.5rem
+}
+
+.h-11 {
+  height: 2.75rem
+}
+
+.h-14 {
+  height: 3.5rem
+}
+
+.w-full {
+  width: 100%
+}
+
+.w-52 {
+  width: 13rem
+}
+
+.w-10 {
+  width: 2.5rem
+}
+
+.w-11 {
+  width: 2.75rem
+}
+
+.w-14 {
+  width: 3.5rem
+}
+
 .flex-1 {
   flex: 1 1 0%
+}
+
+.flex-row {
+  flex-direction: row
 }
 
 .items-center {
@@ -10,34 +82,43 @@
   justify-content: center
 }
 
+.justify-between {
+  justify-content: space-between
+}
+
+.self-center {
+  align-self: center
+}
+
+.rounded-lg {
+  border-radius: 0.5rem
+}
+
+.rounded-2xl {
+  border-radius: 1rem
+}
+
 .rounded-full {
   border-radius: 9999px
 }
 
-.bg-blue-200 {
+.bg-white {
   --tw-bg-opacity: 1;
-  background-color: rgb(191 219 254 / var(--tw-bg-opacity))
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.px-3 {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem
+.p-4 {
+  padding: 1rem
 }
 
-.py-1 {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem
+.p-5 {
+  padding: 1.25rem
 }
 
-.pt-12 {
-  padding-top: 3rem
+.text-center {
+  text-align: center
 }
 
 .font-semibold {
   font-weight: 600
-}
-
-.text-blue-800 {
-  --tw-text-opacity: 1;
-  color: rgb(30 64 175 / var(--tw-text-opacity))
 }
