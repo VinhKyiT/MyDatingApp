@@ -11,16 +11,58 @@ import { useTailwind } from 'tailwind-rn/dist';
 import { useNavigation } from '@react-navigation/native';
 import useAuth from '../../hooks/useAuth';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Swiper from 'react-native-deck-swiper';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const tw = useTailwind();
   const { user, logOut } = useAuth();
 
-  console.log({ user });
+  const DEMO_DATA = [
+    {
+      id: 1,
+      firstName: 'Ky',
+      lastName: 'Bui',
+      occupation: 'Software Engineer',
+      photoURL: 'https://avatars.githubusercontent.com/u/38911691?v=4',
+      age: '21',
+    },
+    {
+      id: 2,
+      firstName: 'Anh',
+      lastName: 'Nguyen',
+      occupation: 'Software Engineer',
+      photoURL: 'https://avatars.githubusercontent.com/u/86947758?v=4',
+      age: '22',
+    },
+    {
+      id: 3,
+      firstName: 'Trieu',
+      lastName: 'Tran',
+      occupation: 'Software Engineer',
+      photoURL: 'https://avatars.githubusercontent.com/u/79587394?v=4',
+      age: '23',
+    },
+    {
+      id: 4,
+      firstName: 'An',
+      lastName: 'Nguyen',
+      occupation: 'Software Engineer',
+      photoURL: 'https://avatars.githubusercontent.com/u/79587394?v=4',
+      age: '24',
+    },
+    {
+      id: 5,
+      firstName: 'Tin',
+      lastName: 'Mai',
+      occupation: 'Software Engineer',
+      photoURL: 'https://avatars.githubusercontent.com/u/73238680?v=4',
+      age: '25',
+    },
+  ];
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={tw('flex-1')}>
       {/* Header */}
       <View style={tw('flex-row items-center relative justify-between p-5')}>
         <TouchableOpacity style={tw('')} onPress={() => logOut()}>
@@ -42,11 +84,22 @@ const HomeScreen = () => {
         </TouchableOpacity>
       </View>
       {/* Header End */}
-      {/* <Text>HomeScreen</Text>
-      <Button
-        title="Go to Chat Screen"
-        onPress={() => navigation.navigate('Chat')}></Button>
-      <Button title="Logout" onPress={() => logOut()}></Button> */}
+
+      <View style={tw('flex-1 -mt-6')}>
+        <Swiper
+          containerStyle={{ backgroundColor: 'transparent' }}
+          stackSize={5}
+          cards={DEMO_DATA}
+          renderCard={card => (
+            <View key={card.id} style={tw('bg-white h-3/4 rounded-xl')}>
+              <Image
+                style={tw('w-full h-full rounded-xl')}
+                source={{ uri: card.photoURL }}
+              />
+            </View>
+          )}
+        />
+      </View>
     </SafeAreaView>
   );
 };
