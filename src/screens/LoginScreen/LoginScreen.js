@@ -32,7 +32,7 @@ const LoginScreen = () => {
                 { marginHorizontal: '25%' },
               ]}
               onPress={() => signInWithGoogle()}>
-              <Text style={tw('font-semibold text-center')}>
+              <Text style={tw('font-semibold text-center dark:text-black')}>
                 Sign in to the app
               </Text>
             </TouchableOpacity>
