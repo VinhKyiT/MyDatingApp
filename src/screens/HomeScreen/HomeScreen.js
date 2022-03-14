@@ -1,12 +1,11 @@
 import {
   View,
   Text,
-  Button,
   SafeAreaView,
   TouchableOpacity,
   Image,
   StyleSheet,
-  Entypo,
+  Platform,
 } from 'react-native';
 import React, { useRef } from 'react';
 import { useTailwind } from 'tailwind-rn/dist';
@@ -80,7 +79,8 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={tw('flex-1')}>
       {/* Header */}
-      <View style={tw('flex-row items-center relative justify-between p-5')}>
+      <View
+        style={tw('flex-row items-center relative justify-between px-5 py-2')}>
         <TouchableOpacity style={tw('')} onPress={() => logOut()}>
           <Image
             source={{ uri: user.photoURL }}
@@ -163,7 +163,11 @@ const HomeScreen = () => {
           )}
         />
       </View>
-      <View style={tw('flex flex-row justify-evenly mb-2')}>
+      <View
+        style={[
+          tw('flex flex-row justify-evenly'),
+          Platform.OS === 'ios' ? tw('mb-2') : tw('mb-5'),
+        ]}>
         <TouchableOpacity
           onPress={() => swipeRef.current.swipeLeft()}
           style={tw(
