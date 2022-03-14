@@ -13,6 +13,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		46B378F9330B53AA585DD2B1 /* libPods-mydatingapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67870DFC1F00878AB9040291 /* libPods-mydatingapp.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		A96DCF8927DF58D000EB10DD /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC158BF9899C4FD9B0A05085 /* Ionicons.ttf */; };
 		A9CB65D727DCE60A00D763AB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9CB65D627DCE60A00D763AB /* GoogleService-Info.plist */; };
 		D1556D2A358FC43211C71A31 /* libPods-mydatingapp-mydatingappTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C69F041B16C426D40620221A /* libPods-mydatingapp-mydatingappTests.a */; };
 /* End PBXBuildFile section */
@@ -285,6 +286,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A96DCF8927DF58D000EB10DD /* Ionicons.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				A9CB65D727DCE60A00D763AB /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,

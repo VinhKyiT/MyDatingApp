@@ -163,7 +163,7 @@ const HomeScreen = () => {
           )}
         />
       </View>
-      <View style={tw('flex flex-row justify-evenly mb-5')}>
+      <View style={tw('flex flex-row justify-evenly mb-2')}>
         <TouchableOpacity
           onPress={() => swipeRef.current.swipeLeft()}
           style={tw(
