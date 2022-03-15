@@ -13,6 +13,7 @@ import {
   signOut,
 } from '@firebase/auth';
 import { auth } from '../Firebase';
+import { Platform } from 'react-native';
 
 const AuthContext = createContext({});
 
@@ -34,7 +35,7 @@ export const AuthProvider = ({ children }) => {
     return () => unsub();
   }, []);
 
-  const iosConfig = {
+  const config = {
     issuer: 'https://accounts.google.com',
     clientId:
       '696534455324-7fn16cjgbd1kdb7s3t097foj3jttb2s0.apps.googleusercontent.com',
@@ -53,7 +54,7 @@ export const AuthProvider = ({ children }) => {
   };
   const signInWithGoogle = async () => {
     setLoading(true);
-    await authorize(iosConfig)
+    await authorize(config)
       .then(async res => {
         const { idToken, accessToken } = res;
         if (accessToken) {

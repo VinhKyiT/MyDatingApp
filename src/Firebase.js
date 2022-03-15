@@ -8,6 +8,7 @@ import { getFirestore } from 'firebase/firestore';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
+  // databaseURL: 'https://mydatingapp-bf9df.firebaseio.com',
   apiKey: 'AIzaSyBbA6Hu4P--jAEqGROXjGXnWg1rhEsIBHc',
   authDomain: 'mydatingapp-bf9df.firebaseapp.com',
   projectId: 'mydatingapp-bf9df',

@@ -2,7 +2,7 @@ import { View, Image, Text, TextInput, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { useTailwind } from 'tailwind-rn/dist';
 import useAuth from '../../hooks/useAuth';
-import { doc, serverTimestamp, setDoc } from '@firebase/firestore';
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { db } from '../../Firebase';
 import { useNavigation } from '@react-navigation/native';
 

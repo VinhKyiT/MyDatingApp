@@ -7,12 +7,14 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native';
-import React, { useRef } from 'react';
+import React, { useRef, useState, useLayoutEffect } from 'react';
 import { useTailwind } from 'tailwind-rn/dist';
 import { useNavigation } from '@react-navigation/native';
 import useAuth from '../../hooks/useAuth';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Swiper from 'react-native-deck-swiper';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from '../../Firebase';
 
 const styles = StyleSheet.create({
   cardShadow: {
@@ -30,8 +32,15 @@ const styles = StyleSheet.create({
 const HomeScreen = () => {
   const navigation = useNavigation();
   const tw = useTailwind();
+  const [profiles, setProfiles] = useState([]);
   const { user, logOut } = useAuth();
   const swipeRef = useRef(null);
+
+  useLayoutEffect(() => {
+    onSnapshot(doc(db, 'users', user.uid), snapshot => {
+      if (!snapshot.exists) navigation.navigate('Modal');
+    });
+  }, []);
 
   const DEMO_DATA = [
     {
@@ -135,32 +144,53 @@ const HomeScreen = () => {
             console.log('swipe like');
           }}
           backgroundColor={'#4FD0E9'}
-          cards={DEMO_DATA}
-          renderCard={card => (
-            <View
-              key={card.id}
-              style={tw('relative bg-white h-3/4 rounded-xl')}>
-              <Image
-                style={tw('absolute top-0 w-full h-full rounded-xl')}
-                source={{ uri: card.photoURL }}
-              />
+          cards={profiles}
+          renderCard={card =>
+            card ? (
+              <View
+                key={card.id}
+                style={tw('relative bg-white h-3/4 rounded-xl')}>
+                <Image
+                  style={tw('absolute top-0 w-full h-full rounded-xl')}
+                  source={{ uri: card.photoURL }}
+                />
+                <View
+                  style={[
+                    tw(
+                      'absolute bg-white dark:bg-slate-900 bottom-0 flex-row justify-between items-center w-full h-20 px-6 rounded-b-xl',
+                    ),
+                    styles.cardShadow,
+                  ]}>
+                  <View>
+                    <Text style={tw('text-xl font-bold')}>
+                      {card.firstName} {card.lastName}
+                    </Text>
+                    <Text>{card.job}</Text>
+                  </View>
+                  <Text style={tw('text-2xl font-bold')}>{card.age}</Text>
+                </View>
+              </View>
+            ) : (
               <View
                 style={[
                   tw(
-                    'absolute bg-white dark:bg-slate-900 bottom-0 flex-row justify-between items-center w-full h-20 px-6 rounded-b-xl',
+                    'relative bg-white h-3/4 rounded-xl justify-center items-center',
                   ),
                   styles.cardShadow,
                 ]}>
-                <View>
-                  <Text style={tw('text-xl font-bold')}>
-                    {card.firstName} {card.lastName}
-                  </Text>
-                  <Text>{card.job}</Text>
-                </View>
-                <Text style={tw('text-2xl font-bold')}>{card.age}</Text>
+                <Text style={tw('font-bold pb-5')}>No more profiles</Text>
+                <Image
+                  resizeMode="contain"
+                  style={tw('w-full h-20')}
+                  height={100}
+                  width={100}
+                  source={{
+                    uri: 'https://cdn.shopify.com/s/files/1/1061/1924/products/Crying_Face_Emoji_large.png?v=1571606037',
+                  }}
+                />
               </View>
-            </View>
-          )}
+            )
+          }
         />
       </View>
       <View
