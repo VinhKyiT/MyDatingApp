@@ -13,7 +13,15 @@ import { useNavigation } from '@react-navigation/native';
 import useAuth from '../../hooks/useAuth';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Swiper from 'react-native-deck-swiper';
-import { doc, onSnapshot, collection } from 'firebase/firestore';
+import {
+  doc,
+  onSnapshot,
+  collection,
+  setDoc,
+  getDocs,
+  query,
+  where,
+} from 'firebase/firestore';
 import { db } from '../../Firebase';
 
 const styles = StyleSheet.create({
@@ -47,63 +55,47 @@ const HomeScreen = () => {
   useEffect(() => {
     let unsub;
     const fetchCard = async () => {
-      unsub = onSnapshot(collection(db, 'users'), snapshot => {
-        setProfiles(
-          snapshot.docs
-            .filter(doc => doc.id !== user.uid)
-            .map(doc => ({
-              id: doc.id,
-              ...doc.data(),
-            })),
-        );
-      });
+      const passes = await getDocs(collection(db, 'users', user.uid, 'passes'))
+        .then(snapshot => {
+          snapshot.docs.map(doc => doc.id);
+        })
+        .catch(err => console.log({ err }));
+
+      console.log(passes);
+
+      const passedUserIds = passes.length > 0 ? passes : ['empty'];
+
+      unsub = onSnapshot(
+        query(
+          collection(db, 'users'),
+          where('id', 'not-in', [...passedUserIds]),
+        ),
+        snapshot => {
+          setProfiles(
+            snapshot.docs
+              .filter(doc => doc.id !== user.uid)
+              .map(doc => ({
+                id: doc.id,
+                ...doc.data(),
+              })),
+          );
+        },
+      );
     };
     fetchCard();
     return unsub;
-  }, []);
+  }, [db]);
 
-  const DEMO_DATA = [
-    {
-      id: 1,
-      firstName: 'Ky',
-      lastName: 'Bui',
-      job: 'Software Engineer',
-      photoURL: 'https://avatars.githubusercontent.com/u/38911691?v=4',
-      age: '21',
-    },
-    {
-      id: 2,
-      firstName: 'Anh',
-      lastName: 'Nguyen',
-      job: 'Software Engineer',
-      photoURL: 'https://avatars.githubusercontent.com/u/86947758?v=4',
-      age: '22',
-    },
-    {
-      id: 3,
-      firstName: 'Trieu',
-      lastName: 'Tran',
-      job: 'Software Engineer',
-      photoURL: 'https://avatars.githubusercontent.com/u/79587394?v=4',
-      age: '23',
-    },
-    {
-      id: 4,
-      firstName: 'An',
-      lastName: 'Nguyen',
-      job: 'Software Engineer',
-      photoURL: 'https://avatars.githubusercontent.com/u/79587394?v=4',
-      age: '24',
-    },
-    {
-      id: 5,
-      firstName: 'Tin',
-      lastName: 'Mai',
-      job: 'Software Engineer',
-      photoURL: 'https://avatars.githubusercontent.com/u/73238680?v=4',
-      age: '25',
-    },
-  ];
+  const swipeLeft = cardIndex => {
+    if (!profiles[cardIndex]) return;
+
+    const userSwiped = profiles[cardIndex];
+    console.log(`You passed ${userSwiped.displayName}`);
+
+    setDoc(doc(db, 'users', user.uid, 'passes', userSwiped.id), userSwiped);
+  };
+
+  const swipeRight = cardIndex => {};
 
   return (
     <SafeAreaView style={tw('flex-1 bg-slate-200 dark:bg-gray-800')}>
@@ -157,11 +149,11 @@ const HomeScreen = () => {
               },
             },
           }}
-          onSwipedLeft={() => {
-            console.log('swipe nope');
+          onSwipedLeft={cardIndex => {
+            swipeLeft(cardIndex);
           }}
-          onSwipedRight={() => {
-            console.log('swipe like');
+          onSwipedRight={cardIndex => {
+            swipeRight(cardIndex);
           }}
           backgroundColor={'#4FD0E9'}
           cards={profiles}
