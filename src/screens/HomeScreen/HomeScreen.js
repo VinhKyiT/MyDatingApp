@@ -7,13 +7,13 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native';
-import React, { useRef, useState, useLayoutEffect } from 'react';
+import React, { useRef, useState, useLayoutEffect, useEffect } from 'react';
 import { useTailwind } from 'tailwind-rn/dist';
 import { useNavigation } from '@react-navigation/native';
 import useAuth from '../../hooks/useAuth';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Swiper from 'react-native-deck-swiper';
-import { doc, onSnapshot } from 'firebase/firestore';
+import { doc, onSnapshot, collection } from 'firebase/firestore';
 import { db } from '../../Firebase';
 
 const styles = StyleSheet.create({
@@ -36,10 +36,30 @@ const HomeScreen = () => {
   const { user, logOut } = useAuth();
   const swipeRef = useRef(null);
 
-  useLayoutEffect(() => {
-    onSnapshot(doc(db, 'users', user.uid), snapshot => {
-      if (!snapshot.exists) navigation.navigate('Modal');
-    });
+  useLayoutEffect(
+    () =>
+      onSnapshot(doc(db, 'users', user.uid), snapshot => {
+        if (!snapshot.exists()) navigation.navigate('Modal');
+      }),
+    [],
+  );
+
+  useEffect(() => {
+    let unsub;
+    const fetchCard = async () => {
+      unsub = onSnapshot(collection(db, 'users'), snapshot => {
+        setProfiles(
+          snapshot.docs
+            .filter(doc => doc.id !== user.uid)
+            .map(doc => ({
+              id: doc.id,
+              ...doc.data(),
+            })),
+        );
+      });
+    };
+    fetchCard();
+    return unsub;
   }, []);
 
   const DEMO_DATA = [
@@ -163,7 +183,7 @@ const HomeScreen = () => {
                   ]}>
                   <View>
                     <Text style={tw('text-xl font-bold')}>
-                      {card.firstName} {card.lastName}
+                      {card.displayName}
                     </Text>
                     <Text>{card.job}</Text>
                   </View>
