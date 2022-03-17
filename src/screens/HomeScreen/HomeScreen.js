@@ -21,8 +21,11 @@ import {
   getDocs,
   query,
   where,
+  getDoc,
+  serverTimestamp,
 } from 'firebase/firestore';
 import { db } from '../../Firebase';
+import generateId from '../../lib/generateId';
 
 const styles = StyleSheet.create({
   cardShadow: {
@@ -57,18 +60,23 @@ const HomeScreen = () => {
     const fetchCard = async () => {
       const passes = await getDocs(collection(db, 'users', user.uid, 'passes'))
         .then(snapshot => {
-          snapshot.docs.map(doc => doc.id);
+          return snapshot.docs.map(doc => doc.id);
         })
         .catch(err => console.log({ err }));
 
-      console.log(passes);
+      const swipes = await getDocs(collection(db, 'users', user.uid, 'swipes'))
+        .then(snapshot => {
+          return snapshot.docs.map(doc => doc.id);
+        })
+        .catch(err => console.log({ err }));
 
       const passedUserIds = passes.length > 0 ? passes : ['empty'];
+      const swipedUserIds = swipes.length > 0 ? swipes : ['empty'];
 
       unsub = onSnapshot(
         query(
           collection(db, 'users'),
-          where('id', 'not-in', [...passedUserIds]),
+          where('id', 'not-in', [...passedUserIds, ...swipedUserIds]),
         ),
         snapshot => {
           setProfiles(
@@ -82,7 +90,7 @@ const HomeScreen = () => {
         },
       );
     };
-    fetchCard();
+    fetchCard().catch(err => console.log({ err }));
     return unsub;
   }, [db]);
 
@@ -95,7 +103,44 @@ const HomeScreen = () => {
     setDoc(doc(db, 'users', user.uid, 'passes', userSwiped.id), userSwiped);
   };
 
-  const swipeRight = cardIndex => {};
+  const swipeRight = async cardIndex => {
+    if (!profiles[cardIndex]) return;
+
+    const userSwiped = profiles[cardIndex];
+
+    const loggedInProfile = await (
+      await getDoc(doc(db, 'users', user.uid))
+    ).data();
+
+    getDoc(doc(db, 'users', userSwiped.id, 'swipes', user.uid)).then(
+      documentSnapshot => {
+        if (documentSnapshot.exists()) {
+          console.log(`Yeah, you matched with ${userSwiped.displayName}`);
+          setDoc(
+            doc(db, 'users', userSwiped.id, 'swipes', user.uid),
+            userSwiped,
+          );
+          setDoc(doc(db, 'matches', generateId(user.uid, userSwiped.id)), {
+            users: {
+              [user.uid]: loggedInProfile,
+              [userSwiped.id]: userSwiped,
+            },
+            usersMatched: [user.uid, userSwiped.id],
+            timestamp: serverTimestamp(),
+          });
+          navigation.navigate('Match', { loggedInProfile, userSwiped });
+        } else {
+          console.log(`You swiped ${userSwiped.displayName}`);
+          // setDoc(
+          //   doc(db, 'users', userSwiped.id, 'swipes', user.uid),
+          //   userSwiped,
+          // );
+        }
+      },
+    );
+
+    setDoc(doc(db, 'users', user.uid, 'swipes', userSwiped.id), userSwiped);
+  };
 
   return (
     <SafeAreaView style={tw('flex-1 bg-slate-200 dark:bg-gray-800')}>
