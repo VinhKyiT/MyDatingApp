@@ -20,15 +20,15 @@ const MatchScreen = () => {
         />
       </View>
       <Text style={tw('text-white text-center mt-5')}>
-        You and {userSwiped.displayname} have a match!
+        You and {userSwiped.displayName} have a match!
       </Text>
       <View style={tw('flex-row justify-evenly mt-5')}>
         <Image
-          style={tw('h-32 w-32 rounded-full')}
+          style={tw('h-32 w-32 rounded-full border-2 border-white')}
           source={{ uri: loggedInProfile.photoURL }}
         />
         <Image
-          style={tw('h-32 w-32 rounded-full')}
+          style={tw('h-32 w-32 rounded-full border-2 border-white')}
           source={{ uri: userSwiped.photoURL }}
         />
       </View>

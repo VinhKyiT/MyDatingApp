@@ -219,12 +219,14 @@ const HomeScreen = () => {
                     styles.cardShadow,
                   ]}>
                   <View>
-                    <Text style={tw('text-xl font-bold')}>
+                    <Text style={tw('dark:text-white text-xl font-bold')}>
                       {card.displayName}
                     </Text>
-                    <Text>{card.job}</Text>
+                    <Text style={tw('dark:text-white')}>{card.job}</Text>
                   </View>
-                  <Text style={tw('text-2xl font-bold')}>{card.age}</Text>
+                  <Text style={tw('dark:text-white text-2xl font-bold')}>
+                    {card.age}
+                  </Text>
                 </View>
               </View>
             ) : (
@@ -235,7 +237,9 @@ const HomeScreen = () => {
                   ),
                   styles.cardShadow,
                 ]}>
-                <Text style={tw('font-bold pb-5')}>No more profiles</Text>
+                <Text style={tw('dark:text-white font-bold pb-5')}>
+                  No more profiles
+                </Text>
                 <Image
                   resizeMode="contain"
                   style={tw('w-full h-20')}
