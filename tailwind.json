@@ -62,6 +62,11 @@
 			"marginTop": 80
 		}
 	},
+	"mr-4": {
+		"style": {
+			"marginRight": 16
+		}
+	},
 	"flex": {
 		"style": {
 			"display": "flex"
@@ -282,6 +287,14 @@
 			"paddingLeft": 12
 		}
 	},
+	"p-5": {
+		"style": {
+			"paddingTop": 20,
+			"paddingRight": 20,
+			"paddingBottom": 20,
+			"paddingLeft": 20
+		}
+	},
 	"px-5": {
 		"style": {
 			"paddingLeft": 20,
@@ -330,6 +343,11 @@
 	"pb-2": {
 		"style": {
 			"paddingBottom": 8
+		}
+	},
+	"pl-2": {
+		"style": {
+			"paddingLeft": 8
 		}
 	},
 	"text-center": {

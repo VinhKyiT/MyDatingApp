@@ -46,6 +46,10 @@
   margin-top: 5rem
 }
 
+.mr-4 {
+  margin-right: 1rem
+}
+
 .flex {
   display: flex
 }
@@ -203,6 +207,10 @@
   padding: 0.75rem
 }
 
+.p-5 {
+  padding: 1.25rem
+}
+
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem
@@ -242,6 +250,10 @@
 
 .pb-2 {
   padding-bottom: 0.5rem
+}
+
+.pl-2 {
+  padding-left: 0.5rem
 }
 
 .text-center {
