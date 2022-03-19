@@ -11,7 +11,7 @@ const Header = ({ title, callEnable }) => {
   return (
     <View style={tw('p-2 flex-row items-center justify-between')}>
       <View style={tw('flex flex-row items-center')}>
-        <TouchableOpacity style={tw('p-2')}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={tw('p-2')}>
           <Icon name="chevron-back-outline" size={34} color="#ff5864" />
         </TouchableOpacity>
         <Text style={tw('text-2xl font-bold p-2')}>{title}</Text>
