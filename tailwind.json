@@ -537,6 +537,20 @@
 		},
 		"media": "(prefers-color-scheme: dark)"
 	},
+	"dark:bg-slate-600": {
+		"style": {
+			"--tw-bg-opacity": 1,
+			"backgroundColor": "rgb(71 85 105 / var(--tw-bg-opacity))"
+		},
+		"media": "(prefers-color-scheme: dark)"
+	},
+	"dark:bg-slate-700": {
+		"style": {
+			"--tw-bg-opacity": 1,
+			"backgroundColor": "rgb(51 65 85 / var(--tw-bg-opacity))"
+		},
+		"media": "(prefers-color-scheme: dark)"
+	},
 	"dark:text-black": {
 		"style": {
 			"--tw-text-opacity": 1,

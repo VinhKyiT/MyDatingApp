@@ -25,7 +25,7 @@ const ChatRow = ({ matchDetails }) => {
         orderBy('timestamp', 'desc'),
       ),
       snapshot => {
-        setLastMessage(snapshot.docs[0].data().message);
+        setLastMessage(snapshot.docs[0]?.data()?.message);
       },
     );
   }, [matchDetails, db]);
@@ -34,7 +34,9 @@ const ChatRow = ({ matchDetails }) => {
     <TouchableOpacity
       onPress={() => navigation.navigate('Messages', { matchDetails })}
       style={[
-        tw('flex-row items-center py-3 px-5 bg-white mx-3 my-1 rounded-lg'),
+        tw(
+          'flex-row items-center py-3 px-5 bg-white dark:bg-slate-700 mx-3 my-1 rounded-lg',
+        ),
         styles.cardShadow,
       ]}>
       <Image
@@ -42,10 +44,10 @@ const ChatRow = ({ matchDetails }) => {
         source={{ uri: matchedUserInfo?.photoURL }}
       />
       <View>
-        <Text style={tw('text-lg font-semibold')}>
+        <Text style={tw('text-lg font-semibold dark:text-white')}>
           {matchedUserInfo?.displayName}
         </Text>
-        <Text>{lastMessage || 'Say hi!'}</Text>
+        <Text style={tw('dark:text-white')}>{lastMessage || 'Say hi!'}</Text>
       </View>
     </TouchableOpacity>
   );
