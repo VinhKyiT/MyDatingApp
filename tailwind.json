@@ -37,6 +37,18 @@
 			"marginLeft": 20
 		}
 	},
+	"mx-3": {
+		"style": {
+			"marginLeft": 12,
+			"marginRight": 12
+		}
+	},
+	"my-1": {
+		"style": {
+			"marginTop": 4,
+			"marginBottom": 4
+		}
+	},
 	"-mt-6": {
 		"style": {
 			"marginTop": -24
@@ -198,6 +210,14 @@
 			"borderBottomLeftRadius": 16
 		}
 	},
+	"rounded-lg": {
+		"style": {
+			"borderTopLeftRadius": 8,
+			"borderTopRightRadius": 8,
+			"borderBottomRightRadius": 8,
+			"borderBottomLeftRadius": 8
+		}
+	},
 	"rounded-b-xl": {
 		"style": {
 			"borderBottomRightRadius": 12,
@@ -323,6 +343,12 @@
 		"style": {
 			"paddingTop": 32,
 			"paddingBottom": 32
+		}
+	},
+	"py-3": {
+		"style": {
+			"paddingTop": 12,
+			"paddingBottom": 12
 		}
 	},
 	"pb-5": {
