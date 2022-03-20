@@ -147,7 +147,7 @@ const HomeScreen = () => {
       {/* Header */}
       <View
         style={tw('flex-row items-center relative justify-between px-5 py-2')}>
-        <TouchableOpacity style={tw('')} onPress={() => logOut()}>
+        <TouchableOpacity onPress={() => logOut()}>
           <Image
             source={{ uri: user.photoURL }}
             style={tw('w-10 h-10 rounded-full')}
