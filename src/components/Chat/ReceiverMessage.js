@@ -1,4 +1,4 @@
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Dimensions } from 'react-native';
 import React from 'react';
 import { useTailwind } from 'tailwind-rn/dist';
 
@@ -8,7 +8,10 @@ const ReceiverMessage = ({ message }) => {
     <View
       style={[
         tw('bg-red-400 rounded-lg rounded-tl-none px-5 py-3 mx-3 my-2 ml-14'),
-        { alignSelf: 'flex-start' },
+        {
+          alignSelf: 'flex-start',
+          maxWidth: Dimensions.get('window').width / 2 + 10,
+        },
       ]}>
       <Image
         style={tw('h-10 w-10 rounded-full absolute top-0 -left-14')}

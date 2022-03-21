@@ -64,7 +64,7 @@ const MessagesScreen = () => {
   };
 
   return (
-    <SafeAreaView style={tw('flex-1 dark:bg-slate-900')}>
+    <SafeAreaView style={tw('flex-1 dark:bg-zinc-900')}>
       <Header
         callEnable
         title={getMatchedUserInfo(matchDetails.users, user.uid).displayName}
@@ -90,11 +90,13 @@ const MessagesScreen = () => {
         </TouchableWithoutFeedback>
 
         <View
-          style={tw(
-            'flex-row justify-between items-center border-t border-gray-200 px-5 py-2',
-          )}>
+          style={[
+            tw(
+              'flex-row justify-between items-center border-t border-gray-200 px-5 py-2',
+            ),
+          ]}>
           <TextInput
-            style={tw('h-10 text-lg dark:text-white')}
+            style={tw('h-12 text-lg dark:text-white')}
             placeholder="Enter message..."
             onChangeText={setInput}
             onSubmitEditing={sendMessage}

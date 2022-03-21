@@ -10,6 +10,7 @@ import { db } from '../../Firebase';
 const ChatRow = ({ matchDetails }) => {
   const [matchedUserInfo, setMatchedUserInfo] = useState(null);
   const [lastMessage, setLastMessage] = useState('');
+  const [isYouLastSender, setIsYouLastSender] = useState(false);
   const navigation = useNavigation();
   const { user } = useAuth();
   const tw = useTailwind();
@@ -30,12 +31,28 @@ const ChatRow = ({ matchDetails }) => {
     );
   }, [matchDetails, db]);
 
+  useEffect(() => {
+    onSnapshot(
+      query(
+        collection(db, 'matches', matchDetails.id, 'messages'),
+        orderBy('timestamp', 'desc'),
+      ),
+      snapshot => {
+        if (snapshot.docs[0]?.data()?.userId === user.uid) {
+          setIsYouLastSender(true);
+        } else {
+          setIsYouLastSender(false);
+        }
+      },
+    );
+  }, [matchDetails, db]);
+
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('Messages', { matchDetails })}
       style={[
         tw(
-          'flex-row items-center py-3 px-5 bg-white dark:bg-slate-700 mx-3 my-1 rounded-lg',
+          'flex-row items-center py-3 px-5 bg-white dark:bg-zinc-700 mx-3 my-1 rounded-lg',
         ),
         styles.cardShadow,
       ]}>
@@ -43,11 +60,14 @@ const ChatRow = ({ matchDetails }) => {
         style={tw('rounded-full h-16 w-16 mr-4')}
         source={{ uri: matchedUserInfo?.photoURL }}
       />
-      <View>
+      <View style={tw('flex-1')}>
         <Text style={tw('text-lg font-semibold dark:text-white')}>
           {matchedUserInfo?.displayName}
         </Text>
-        <Text style={tw('dark:text-white')}>{lastMessage || 'Say hi!'}</Text>
+        <Text numberOfLines={1} style={[tw('dark:text-white')]}>
+          {isYouLastSender && 'You: '}
+          {lastMessage || 'Say hi!'}
+        </Text>
       </View>
     </TouchableOpacity>
   );

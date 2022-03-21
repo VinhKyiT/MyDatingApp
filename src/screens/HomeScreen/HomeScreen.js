@@ -143,7 +143,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <SafeAreaView style={tw('flex-1 bg-slate-200 dark:bg-gray-800')}>
+    <SafeAreaView style={tw('flex-1 bg-zinc-200 dark:bg-zinc-900')}>
       {/* Header */}
       <View
         style={tw('flex-row items-center relative justify-between px-5 py-2')}>
@@ -214,7 +214,7 @@ const HomeScreen = () => {
                 <View
                   style={[
                     tw(
-                      'absolute bg-white dark:bg-slate-900 bottom-0 flex-row justify-between items-center w-full h-20 px-6 rounded-b-xl',
+                      'absolute bg-white dark:bg-zinc-800 bottom-0 flex-row justify-between items-center w-full h-20 px-6 rounded-b-xl',
                     ),
                     styles.cardShadow,
                   ]}>
@@ -233,7 +233,7 @@ const HomeScreen = () => {
               <View
                 style={[
                   tw(
-                    'relative bg-white h-3/4 rounded-xl justify-center items-center',
+                    'relative bg-white dark:bg-zinc-800 h-3/4 rounded-xl justify-center items-center',
                   ),
                   styles.cardShadow,
                 ]}>

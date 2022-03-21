@@ -36,7 +36,7 @@ const ModalScreen = () => {
   const { user } = useAuth();
 
   return (
-    <View style={tw('bg-white dark:bg-slate-900 flex-1 items-center pt-1')}>
+    <View style={tw('bg-white dark:bg-zinc-900 flex-1 items-center pt-1')}>
       <Image
         style={tw('w-full h-20')}
         resizeMode="contain"

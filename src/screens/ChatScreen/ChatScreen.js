@@ -8,7 +8,7 @@ const ChatScreen = () => {
   const tw = useTailwind();
 
   return (
-    <SafeAreaView style={tw('dark:bg-slate-900')}>
+    <SafeAreaView style={tw('dark:bg-zinc-900')}>
       <Header title="Chat" />
       <ChatList />
     </SafeAreaView>

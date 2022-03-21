@@ -157,6 +157,14 @@
   flex-direction: row
 }
 
+.flex-wrap {
+  flex-wrap: wrap
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap
+}
+
 .items-center {
   align-items: center
 }
@@ -171,6 +179,10 @@
 
 .justify-evenly {
   justify-content: space-evenly
+}
+
+.overflow-hidden {
+  overflow: hidden
 }
 
 .rounded-full {
@@ -264,6 +276,16 @@
   background-color: rgb(147 51 234 / var(--tw-bg-opacity))
 }
 
+.bg-zinc-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(228 228 231 / var(--tw-bg-opacity))
+}
+
+.bg-zinc-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(24 24 27 / var(--tw-bg-opacity))
+}
+
 .p-4 {
   padding: 1rem
 }
@@ -310,6 +332,11 @@
   padding-bottom: 0.75rem
 }
 
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem
+}
+
 .pb-5 {
   padding-bottom: 1.25rem
 }
@@ -340,6 +367,10 @@
 
 .pb-4 {
   padding-bottom: 1rem
+}
+
+.pr-10 {
+  padding-right: 2.5rem
 }
 
 .text-center {
@@ -408,6 +439,21 @@
   .dark\:bg-slate-700 {
     --tw-bg-opacity: 1;
     background-color: rgb(51 65 85 / var(--tw-bg-opacity))
+  }
+
+  .dark\:bg-zinc-700 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(63 63 70 / var(--tw-bg-opacity))
+  }
+
+  .dark\:bg-zinc-900 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(24 24 27 / var(--tw-bg-opacity))
+  }
+
+  .dark\:bg-zinc-800 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(39 39 42 / var(--tw-bg-opacity))
   }
 
   .dark\:text-black {
