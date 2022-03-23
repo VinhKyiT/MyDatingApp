@@ -1,16 +1,30 @@
-import { View, Image, Text, TextInput, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
 import React, { useState } from 'react';
 import { useTailwind } from 'tailwind-rn/dist';
 import useAuth from '../../hooks/useAuth';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
-import { db } from '../../Firebase';
+import { db, storage } from '../../Firebase';
 import { useNavigation } from '@react-navigation/native';
+import ImagePicker from 'react-native-image-crop-picker';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import ProgressBar from 'react-native-progress/Bar';
 
 const ModalScreen = () => {
   const tw = useTailwind();
   const [image, setImage] = useState('');
   const [job, setJob] = useState('');
   const [age, setAge] = useState('');
+  const [imageUploading, setImageUploading] = useState(false);
+  const [percentage, setPercentage] = useState(0);
+
+  const { user } = useAuth();
 
   const navigation = useNavigation();
 
@@ -33,7 +47,55 @@ const ModalScreen = () => {
       });
   };
 
-  const { user } = useAuth();
+  const launchCamera = async () => {
+    ImagePicker.openCamera({})
+      .then(async image => {
+        const fileRef = ref(storage, `images/${user.uid}/${image.filename}`);
+        const img = await fetch(image.path);
+        const bytes = await img.blob();
+        const uploadTask = uploadBytesResumable(fileRef, bytes);
+        uploadTask.on(
+          'state_changed',
+          snapshot => {
+            setImageUploading(true);
+            setPercentage(snapshot.bytesTransferred / snapshot.totalBytes);
+          },
+          error => {
+            console.log(error);
+          },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
+              setImage(downloadURL);
+            });
+          },
+        );
+      })
+      .catch(err => console.log(err));
+  };
+
+  const openLibrary = async () => {
+    ImagePicker.openPicker({}).then(async image => {
+      const fileRef = ref(storage, `images/${user.uid}/${image.filename}`);
+      const img = await fetch(image.path);
+      const bytes = await img.blob();
+      const uploadTask = uploadBytesResumable(fileRef, bytes);
+      uploadTask.on(
+        'state_changed',
+        snapshot => {
+          setImageUploading(true);
+          setPercentage(snapshot.bytesTransferred / snapshot.totalBytes);
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
+            setImage(downloadURL);
+          });
+        },
+      );
+    });
+  };
 
   return (
     <View style={tw('bg-white dark:bg-zinc-900 flex-1 items-center pt-1')}>
@@ -50,12 +112,27 @@ const ModalScreen = () => {
       <Text style={tw('text-center text-red-400 p-4 font-bold')}>
         Step 1: The Profile Pic
       </Text>
-      <TextInput
-        value={image}
-        onChangeText={setImage}
-        style={tw('text-center text-xl pb-2')}
-        placeholder="Enter Profile Pic URL"
-      />
+      {!image ? (
+        !imageUploading ? (
+          <>
+            <TouchableOpacity onPress={() => openLibrary()}>
+              <Text>Choose from Library</Text>
+            </TouchableOpacity>
+            <Text>or</Text>
+            <TouchableOpacity onPress={() => launchCamera()}>
+              <Text>Take a Photo</Text>
+            </TouchableOpacity>
+          </>
+        ) : (
+          <ProgressBar progress={percentage} />
+        )
+      ) : (
+        <Image
+          resizeMode="cover"
+          source={{ uri: image }}
+          style={tw('w-1/2 h-40 rounded-lg')}
+        />
+      )}
       <Text style={tw('text-center text-red-400 p-4 font-bold')}>
         Step 2: The Job
       </Text>

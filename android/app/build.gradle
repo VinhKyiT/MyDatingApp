@@ -139,6 +139,7 @@ android {
         manifestPlaceholders = [
             appAuthRedirectScheme: 'com.googleusercontent.apps.696534455324-7fn16cjgbd1kdb7s3t097foj3jttb2s0'
         ]
+        vectorDrawables.useSupportLibrary = true
     }
     splits {
         abi {
