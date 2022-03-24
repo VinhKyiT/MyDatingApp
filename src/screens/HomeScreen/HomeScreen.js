@@ -26,6 +26,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../Firebase';
 import generateId from '../../lib/generateId';
+import LinearGradient from 'react-native-linear-gradient';
 
 const styles = StyleSheet.create({
   cardShadow: {
@@ -211,23 +212,38 @@ const HomeScreen = () => {
                   style={tw('absolute top-0 w-full h-full rounded-xl')}
                   source={{ uri: card.photoURL }}
                 />
-                <View
-                  style={[
-                    tw(
-                      'absolute bg-white dark:bg-zinc-800 bottom-0 flex-row justify-between items-center w-full h-20 px-6 rounded-b-xl',
-                    ),
-                    styles.cardShadow,
-                  ]}>
-                  <View>
-                    <Text style={tw('dark:text-white text-xl font-bold')}>
-                      {card.displayName}
+                <LinearGradient
+                  colors={[
+                    'rgba(0, 0, 0, 0)',
+                    'rgba(0, 0, 0, 0.2)',
+                    'rgba(0, 0, 0, 1)',
+                  ]}
+                  style={tw('absolute top-0 w-full h-full rounded-xl')}>
+                  <View
+                    style={[
+                      tw(
+                        'absolute bottom-0 flex-row justify-between items-center w-full h-20 px-6 rounded-b-xl',
+                      ),
+                      styles.cardShadow,
+                    ]}>
+                    <View>
+                      <Text style={tw('text-white text-xl font-bold')}>
+                        {card.displayName}{' '}
+                        {
+                          <Icon
+                            name="information-circle"
+                            size={18}
+                            color="#fff"
+                          />
+                        }
+                      </Text>
+                      <Text style={tw('text-white')}>{card.job}</Text>
+                    </View>
+                    <Text style={tw('text-white text-2xl font-bold')}>
+                      {card.age}
                     </Text>
-                    <Text style={tw('dark:text-white')}>{card.job}</Text>
                   </View>
-                  <Text style={tw('dark:text-white text-2xl font-bold')}>
-                    {card.age}
-                  </Text>
-                </View>
+                </LinearGradient>
               </View>
             ) : (
               <View

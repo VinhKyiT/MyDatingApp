@@ -34,6 +34,16 @@
 			"bottom": 40
 		}
 	},
+	"z-50": {
+		"style": {
+			"zIndex": 50
+		}
+	},
+	"z-10": {
+		"style": {
+			"zIndex": 10
+		}
+	},
 	"m-5": {
 		"style": {
 			"marginTop": 20,
@@ -342,6 +352,11 @@
 		"style": {
 			"--tw-bg-opacity": 1,
 			"backgroundColor": "rgb(156 163 175 / var(--tw-bg-opacity))"
+		}
+	},
+	"bg-transparent": {
+		"style": {
+			"backgroundColor": "transparent"
 		}
 	},
 	"p-5": {

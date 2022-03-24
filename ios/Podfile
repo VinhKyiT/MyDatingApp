@@ -6,6 +6,8 @@ platform :ios, '11.0'
 target 'mydatingapp' do
   config = use_native_modules!
 
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
   use_react_native!(
     :path => config[:reactNativePath],
     # to enable hermes on iOS, change `false` to `true` and then install pods
