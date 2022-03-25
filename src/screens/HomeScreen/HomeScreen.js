@@ -46,7 +46,7 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   const tw = useTailwind();
   const [profiles, setProfiles] = useState([]);
-  const { user, logOut } = useAuth();
+  const { user } = useAuth();
   const swipeRef = useRef(null);
 
   useLayoutEffect(
@@ -149,7 +149,7 @@ const HomeScreen = () => {
       {/* Header */}
       <View
         style={tw('flex-row items-center relative justify-between px-5 py-2')}>
-        <TouchableOpacity onPress={() => logOut()}>
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
           <Image
             source={{ uri: user.photoURL }}
             style={tw('w-10 h-10 rounded-full')}

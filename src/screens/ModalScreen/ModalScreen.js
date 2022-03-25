@@ -131,11 +131,13 @@ const ModalScreen = () => {
         !imageUploading ? (
           <>
             <TouchableOpacity onPress={() => openLibrary()}>
-              <Text>Choose from Library</Text>
+              <Text style={tw('text-black dark:text-white')}>
+                Choose from Library
+              </Text>
             </TouchableOpacity>
-            <Text>or</Text>
+            <Text style={tw('text-black dark:text-white')}>or</Text>
             <TouchableOpacity onPress={() => launchCamera()}>
-              <Text>Take a Photo</Text>
+              <Text style={tw('text-black dark:text-white')}>Take a Photo</Text>
             </TouchableOpacity>
           </>
         ) : (
@@ -154,7 +156,7 @@ const ModalScreen = () => {
       <TextInput
         value={job}
         onChangeText={setJob}
-        style={tw('text-center text-xl pb-2')}
+        style={tw('text-center text-xl pb-2 text-black dark:text-white')}
         placeholder="Enter Your Job"
       />
       <Text style={tw('text-center text-red-400 p-4 font-bold')}>
@@ -163,7 +165,7 @@ const ModalScreen = () => {
       <TextInput
         value={age}
         onChangeText={setAge}
-        style={tw('text-center text-xl pb-2')}
+        style={tw('text-center text-xl pb-2 text-black dark:text-white')}
         placeholder="Enter Your Age"
         maxLength={2}
         keyboardType="numeric"
