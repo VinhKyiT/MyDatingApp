@@ -81,6 +81,26 @@
   margin-top: 5rem
 }
 
+.ml-3 {
+  margin-left: 0.75rem
+}
+
+.ml-10 {
+  margin-left: 2.5rem
+}
+
+.ml-7 {
+  margin-left: 1.75rem
+}
+
+.ml-5 {
+  margin-left: 1.25rem
+}
+
+.ml-2 {
+  margin-left: 0.5rem
+}
+
 .flex {
   display: flex
 }
@@ -121,6 +141,10 @@
   height: 10rem
 }
 
+.h-60 {
+  height: 15rem
+}
+
 .w-16 {
   width: 4rem
 }
@@ -151,6 +175,10 @@
 
 .w-64 {
   width: 16rem
+}
+
+.w-3\/4 {
+  width: 75%
 }
 
 .flex-1 {

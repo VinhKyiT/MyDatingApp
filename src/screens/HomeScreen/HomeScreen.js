@@ -12,6 +12,7 @@ import { useTailwind } from 'tailwind-rn/dist';
 import { useNavigation } from '@react-navigation/native';
 import useAuth from '../../hooks/useAuth';
 import Icon from 'react-native-vector-icons/Ionicons';
+import IconFeather from 'react-native-vector-icons/Feather';
 import Swiper from 'react-native-deck-swiper';
 import {
   doc,
@@ -229,13 +230,7 @@ const HomeScreen = () => {
                     <View>
                       <Text style={tw('text-white text-xl font-bold')}>
                         {card.displayName}{' '}
-                        {
-                          <Icon
-                            name="information-circle"
-                            size={18}
-                            color="#fff"
-                          />
-                        }
+                        {<IconFeather name="info" size={18} color="#fff" />}
                       </Text>
                       <Text style={tw('text-white')}>{card.job}</Text>
                     </View>

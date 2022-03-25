@@ -105,6 +105,31 @@
 			"marginTop": 80
 		}
 	},
+	"ml-3": {
+		"style": {
+			"marginLeft": 12
+		}
+	},
+	"ml-10": {
+		"style": {
+			"marginLeft": 40
+		}
+	},
+	"ml-7": {
+		"style": {
+			"marginLeft": 28
+		}
+	},
+	"ml-5": {
+		"style": {
+			"marginLeft": 20
+		}
+	},
+	"ml-2": {
+		"style": {
+			"marginLeft": 8
+		}
+	},
 	"flex": {
 		"style": {
 			"display": "flex"
@@ -155,6 +180,11 @@
 			"height": 160
 		}
 	},
+	"h-60": {
+		"style": {
+			"height": 240
+		}
+	},
 	"w-16": {
 		"style": {
 			"width": 64
@@ -193,6 +223,11 @@
 	"w-64": {
 		"style": {
 			"width": 256
+		}
+	},
+	"w-3/4": {
+		"style": {
+			"width": "75%"
 		}
 	},
 	"flex-1": {

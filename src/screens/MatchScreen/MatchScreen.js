@@ -2,6 +2,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTailwind } from 'tailwind-rn/dist';
+import Feather from 'react-native-vector-icons/Feather';
 
 const MatchScreen = () => {
   const navigation = useNavigation();
@@ -12,6 +13,14 @@ const MatchScreen = () => {
 
   return (
     <View style={[tw('h-full bg-red-500 pt-20'), { opacity: 0.89 }]}>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Feather
+          name="chevron-left"
+          size={30}
+          color="#fff"
+          style={tw('ml-2 px-5 py-2')}
+        />
+      </TouchableOpacity>
       <View style={tw('justify-center px-10 pt-20')}>
         <Image
           style={tw('w-full h-20')}
